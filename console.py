@@ -9,3 +9,6 @@ book_repository.delete_all()
 
 book1 = Book("Harry Potter", 2001, "JK Rowling")
 book_repository.save(book1)
+book2 = Book("Jamie's Book", 1996, "Jamie Nolan")
+book_repository.save(book2)
+
