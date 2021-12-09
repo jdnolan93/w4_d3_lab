@@ -13,37 +13,53 @@ def save(author):
     return author
 
 
-# def select_all():
-#     authors = []
+def select_all():
+    authors = []
 
-#     sql = "SELECT * FROM authors"
-#     results = run_sql(sql)
+    sql = "SELECT * FROM authors"
+    results = run_sql(sql)
 
-#     for row in results:
-#         author = Author(row['first_name'], row['last_name'], row[‘id’])
-#         authors.append(author)
-#     return authors
+    for row in results:
+        author = Author(row['first_name'], row['last_name'], row['id'] )
+        authors.append(author)
+    return authors
+        
 
 
-# def select(id):
-#     author = None
-#     sql = “SELECT * FROM authors WHERE id = %s”
-#     values = [id]
-#     result = run_sql(sql, values)[0]
-#     if result is not None:
-#         author = Author(result[‘first_name’], result[‘last_name’], result[‘id’] )
-#     return author
+def select(id):
+    author = None
+    sql = "SELECT * FROM authors WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+    
+    if result is not None:
+        author = Author(result['first_name'], result['last_name'], result['id'] )
+    return author
 
 def delete_all():
-    pass
+    sql = "DELETE  FROM authors"
+    run_sql(sql)
 
 
-def delete():
-    pass
+def delete(id):
+    sqp = DELETE FROM authers WHERE id = %s
+    values = [id]
+    run_sql(sql, values)
 
 
 def update():
-    pass
+    sql = "UPDATE authors SET (first_name, last_name) = (%s, %s) WHERE id = %s"
+    values = [author.first_name, author.last_name, author.id]
+    run_sql(sql, values)
 
 def books():
-    pass
+    books = []
+
+    sql = "SELECT * FROM books WHERE author_id = %s"
+    values = [author.id]
+    results = run_sql(sql, values)
+
+    for row in results:
+        book = Book(row['title'], row['genre'], row['publisher'], row['author_id'], row['id'] )
+        books.append(book)
+    return books

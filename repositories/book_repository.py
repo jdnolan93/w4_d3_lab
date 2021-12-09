@@ -13,16 +13,16 @@ def save(book):
     book.id = id
     return book
 
-# def select_all():
-#     task = []
+def select_all():
+    task = []
 
-#     sql = "SELECT * FROM books"
-#     results = run_sql(sql)
-#     for row in results:
-#         auth = user_repository.select(row[‘user_id’])
-#         book = Book(row[‘title’], user, row[‘author’], row[‘year’], row[‘id’] )
-#         books.append(book)
-#     return books
+    sql = "SELECT * FROM books"
+    results = run_sql(sql)
+    for row in results:
+        author = author_repository.select(row[‘author_id’])
+        book = Book(row[‘title’], user, row[‘author’], row[‘year’], row[‘id’] )
+        books.append(book)
+    return books
 
 
 
